@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>点亮人生 | 每日励志</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        // Tailwind 配置
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#10B981',
+                        accent: '#F59E0B',
+                        dark: '#1E293B',
+                        light: '#F8FAFC'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        serif: ['Merriweather', 'Georgia', 'serif']
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .text-shadow {
+                text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            .text-gradient {
+                background-clip: text;
+                -webkit-background-clip: text;
+                color: transparent;
+            }
+            .animate-float {
+                animation: float 6s ease-in-out infinite;
+            }
+            .animate-pulse-slow {
+                animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+            }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+    </style>
+</head>
+<body class="bg-light text-dark antialiased">
+    <!-- 导航栏 -->
+    <header id="navbar" class="fixed w-full top-0 z-50 transition-all duration-300 bg-transparent">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="#" class="flex items-center space-x-2">
+                <i class="fa fa-lightbulb-o text-2xl text-primary"></i>
+                <span class="text-xl font-bold">点亮人生</span>
+            </a>
+            
+            <!-- 桌面导航 -->
+            <nav class="hidden md:flex space-x-8">
+                <a href="#home" class="font-medium hover:text-primary transition-colors">首页</a>
+                <a href="#quotes" class="font-medium hover:text-primary transition-colors">励志名言</a>
+                <a href="#stories" class="font-medium hover:text-primary transition-colors">成功故事</a>
+                <a href="#goals" class="font-medium hover:text-primary transition-colors">目标设定</a>
+                <a href="#motivation" class="font-medium hover:text-primary transition-colors">每日激励</a>
+            </nav>
+            
+            <!-- 移动端菜单按钮 -->
+            <button id="menu-toggle" class="md:hidden text-xl">
+                <i class="fa fa-bars"></i>
+            </button>
+        </div>
+        
+        <!-- 移动端导航菜单 -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg absolute w-full">
+            <div class="container mx-auto px-4 py-4 flex flex-col space-y-4">
+                <a href="#home" class="font-medium hover:text-primary transition-colors py-2">首页</a>
+                <a href="#quotes" class="font-medium hover:text-primary transition-colors py-2">励志名言</a>
+                <a href="#stories" class="font-medium hover:text-primary transition-colors py-2">成功故事</a>
+                <a href="#goals" class="font-medium hover:text-primary transition-colors py-2">目标设定</a>
+                <a href="#motivation" class="font-medium hover:text-primary transition-colors py-2">每日激励</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- 英雄区域 -->
+        <section id="home" class="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 pt-16">
+            <div class="container mx-auto px-4 py-16 md:py-24">
+                <div class="flex flex-col md:flex-row items-center">
+                    <div class="md:w-1/2 mb-10 md:mb-0">
+                        <h1 class="text-[clamp(2.5rem,5vw,4rem)] font-bold leading-tight text-shadow mb-6">
+                            相信自己<br>
+                            <span class="bg-gradient-to-r from-primary to-secondary text-gradient">一切皆有可能</span>
+                        </h1>
+                        <p class="text-lg md:text-xl text-gray-600 mb-8 max-w-lg">
+                            每一天都是新的开始，每一次努力都让你离梦想更近一步。不要害怕挑战，它们是成长的阶梯。
+                        </p>
+                        <div class="flex flex-wrap gap-4">
+                            <a href="#goals" class="px-8 py-3 bg-primary hover:bg-primary/90 text-white font-medium rounded-full shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1">
+                                设定目标
+                            </a>
+                            <a href="#motivation" class="px-8 py-3 bg-white hover:bg-gray-50 text-primary border border-primary font-medium rounded-full shadow-md hover:shadow-lg transition-all transform hover:-translate-y-1">
+                                获取激励
+                            </a>
+                        </div>
+                    </div>
+                    <div class="md:w-1/2 relative">
+                        <div class="relative z-10 animate-float">
+                            <img src="https://picsum.photos/id/1067/600/500" alt="登山者站在山顶，象征着克服困难达到目标" class="rounded-2xl shadow-2xl">
+                        </div>
+                        <div class="absolute -bottom-6 -left-6 w-32 h-32 bg-accent/20 rounded-full filter blur-2xl"></div>
+                        <div class="absolute -top-6 -right-6 w-32 h-32 bg-primary/20 rounded-full filter blur-2xl"></div>
+                    </div>
+                </div>
+                
+                <!-- 滚动指示器 -->
+                <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+                    <a href="#quotes" class="text-gray-500 hover:text-primary transition-colors">
+                        <i class="fa fa-chevron-down text-2xl"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 励志名言区域 -->
+        <section id="quotes" class="py-20 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-16">
+                    <h2 class="text-[clamp(1.8rem,3vw,2.5rem)] font-bold mb-4">励志名言</h2>
+                    <p class="text-gray-600 max-w-2xl mx-auto">这些智慧的话语来自历史上最成功的人士，它们将激励你克服困难，追求卓越。</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- 名言卡片 1 -->
+                    <div class="bg-gray-50 rounded-xl p-8 shadow-md hover:shadow-lg transition-shadow border border-gray-100">
+                        <div class="text-accent text-4xl mb-4">
+                            <i class="fa fa-quote-left"></i>
+                        </div>
+                        <p class="text-lg italic mb-6">
+                            "成功不是终点，失败也不是末日：这是继续前行的勇气才是最重要的。"
+                        </p>
+                        <div class="flex items-center">
+                            <img src="https://picsum.photos/id/1005/100/100" alt="温斯顿·丘吉尔肖像" class="w-12 h-12 rounded-full object-cover mr-4">
+                            <div>
+                                <h4 class="font-semibold">温斯顿·丘吉尔</h4>
+                                <p class="text-sm text-gray-500">英国首相</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 名言卡片 2 -->
+                    <div class="bg-gray-50 rounded-xl p-8 shadow-md hover:shadow-lg transition-shadow border border-gray-100">
+                        <div class="text-accent text-4xl mb-4">
+                            <i class="fa fa-quote-left"></i>
+                        </div>
+                        <p class="text-lg italic mb-6">
+                            "我们最大的光荣不在于永不失败，而在于每次跌倒后都能爬起来。"
+                        </p>
+                        <div class="flex items-center">
+                            <img src="https://picsum.photos/id/1012/100/100" alt="纳尔逊·曼德拉肖像" class="w-12 h-12 rounded-full object-cover mr-4">
+                            <div>
+                                <h4 class="font-semibold">纳尔逊·曼德拉</h4>
+                                <p class="text-sm text-gray-500">南非前总统</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 名言卡片 3 -->
+                    <div class="bg-gray-50 rounded-xl p-8 shadow-md hover:shadow-lg transition-shadow border border-gray-100">
+                        <div class="text-accent text-4xl mb-4">
+                            <i class="fa fa-quote-left"></i>
+                        </div>
+                        <p class="text-lg italic mb-6">
+                            "你今天所做的选择，决定了你明天将成为什么样的人。"
+                        </p>
+                        <div class="flex items-center">
+                            <img src="https://picsum.photos/id/1025/100/100" alt=" Oprah Winfrey肖像" class="w-12 h-12 rounded-full object-cover mr-4">
+                            <div>
+                                <h4 class="font-semibold">奥普拉·温弗瑞</h4>
+                                <p class="text-sm text-gray-500">媒体企业家</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 名言卡片 4 -->
+                    <div class="bg-gray-50 rounded-xl p-8 shadow-md hover:shadow-lg transition-shadow border border-gray-100">
+                        <div class="text-accent text-4xl mb-4">
+                            <i class="fa fa-quote-left"></i>
+                        </div>
+                        <p class="text-lg italic mb-6">
+                            "生活不是要等待暴风雨过去，而是要学会在雨中跳舞。"
+                        </p>
+                        <div class="flex items-center">
+                            <img src="https://picsum.photos/id/1074/100/100" alt="薇薇安·格林肖像" class="w-12 h-12 rounded-full object-cover mr-4">
+                            <div>
+                                <h4 class="font-semibold">薇薇安·格林</h4>
+                                <p class="text-sm text-gray-500">作家</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 名言卡片 5 -->
+                    <div class="bg-gray-50 rounded-xl p-8 shadow-md hover:shadow-lg transition-shadow border border-gray-100">
+                        <div class="text-accent text-4xl mb-4">
+                            <i class="fa fa-quote-left"></i>
+                        </div>
+                        <p class="text-lg italic mb-6">
+                            "不要让昨天占用太多今天的时间。"
+                        </p>
+                        <div class="flex items-center">
+                            <img src="https://picsum.photos/id/1062/100/100" alt="威尔·罗杰斯肖像" class="w-12 h-12 rounded-full object-cover mr-4">
+                            <div>
+                                <h4 class="font-semibold">威尔·罗杰斯</h4>
+                                <p class="text-sm text-gray-500">演员、幽默家</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 名言卡片 6 -->
+                    <div class="bg-gray-50 rounded-xl p-8 shadow-md hover:shadow-lg transition-shadow border border-gray-100">
+                        <div class="text-accent text-4xl mb-4">
+                            <i class="fa fa-quote-left"></i>
+                        </div>
+                        <p class="text-lg italic mb-6">
+                            "要么你掌控生活，要么生活掌控你。选择权在你手中。"
+                        </p>
+                        <div class="flex items-center">
+                            <img src="https://picsum.photos/id/1000/100/100" alt="厄尔·南丁格尔肖像" class="w-12 h-12 rounded-full object-cover mr-4">
+                            <div>
+                                <h4 class="font-semibold">厄尔·南丁格尔</h4>
+                                <p class="text-sm text-gray-500">励志演说家</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-12">
+                    <button id="new-quote" class="px-6 py-3 bg-white border border-primary text-primary hover:bg-primary hover:text-white rounded-full transition-colors">
+                        加载更多名言
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 成功故事区域 -->
+        <section id="stories" class="py-20 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-16">
+                    <h2 class="text-[clamp(1.8rem,3vw,2.5rem)] font-bold mb-4">成功故事</h2>
+                    <p class="text-gray-600 max-w-2xl mx-auto">这些普通人通过坚持和努力实现梦想的故事，将激励你勇往直前。</p>
+                </div>
+                
+                <div class="space-y-16">
+                    <!-- 故事 1 -->
+                    <div class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
+                        <div class="flex flex-col md:flex-row">
+                            <div class="md:w-2/5">
+                                <img src="https://picsum.photos/id/1059/600/800" alt="JK·罗琳在签售会上" class="w-full h-full object-cover">
+                            </div>
+                            <div class="md:w-3/5 p-8 md:p-12 flex flex-col justify-center">
+                                <span class="text-sm font-semibold text-primary uppercase tracking-wider mb-3">从贫困单身母亲到畅销书作家</span>
+                                <h3 class="text-2xl md:text-3xl font-bold mb-4">J.K.罗琳与《哈利·波特》的诞生</h3>
+                                <p class="text-gray-600 mb-6">
+                                    J.K.罗琳曾是一位失业的单身母亲，靠救济金生活，甚至因抑郁症想过自杀。在爱丁堡的咖啡馆里，她用 napkin（餐巾纸）写下了哈利·波特的最初构想。
+                                </p>
+                                <p class="text-gray-600 mb-6">
+                                    她的手稿被12家出版社拒绝，直到一家小型出版社给了她机会。如今，《哈利·波特》系列已被翻译成80种语言，销量超过5亿册，成为全球现象级作品。
+                                </p>
+                                <div class="mt-auto">
+                                    <p class="text-gray-700 font-medium italic">
+                                        "我从未放弃，因为我心中始终有一个信念：这个故事值得被讲述。"
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 故事 2 -->
+                    <div class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
+                        <div class="flex flex-col md:flex-row-reverse">
+                            <div class="md:w-2/5">
+                                <img src="https://picsum.photos/id/1071/600/800" alt="史蒂夫·乔布斯在演讲" class="w-full h-full object-cover">
+                            </div>
+                            <div class="md:w-3/5 p-8 md:p-12 flex flex-col justify-center">
+                                <span class="text-sm font-semibold text-primary uppercase tracking-wider mb-3">从被解雇到重塑科技行业</span>
+                                <h3 class="text-2xl md:text-3xl font-bold mb-4">史蒂夫·乔布斯的起伏人生</h3>
+                                <p class="text-gray-600 mb-6">
+                                    30岁时，史蒂夫·乔布斯被自己创立的公司苹果解雇。这是他人生中最痛苦的经历，但他没有放弃。
+                                </p>
+                                <p class="text-gray-600 mb-6">
+                                    他创立了NeXT和皮克斯，皮克斯制作了世界上第一部电脑动画电影《玩具总动员》。后来苹果收购了NeXT，乔布斯重返苹果，推出了iPod、iPhone和iPad，彻底改变了多个行业。
+                                </p>
+                                <div class="mt-auto">
+                                    <p class="text-gray-700 font-medium italic">
+                                        "被苹果解雇是我经历过的最好的事情。成功的沉重被初学者的轻松所取代，一切都变得不那么确定，这让我得以进入一生中最富创造力的时期。"
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 目标设定区域 -->
+        <section id="goals" class="py-20 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-16">
+                    <h2 class="text-[clamp(1.8rem,3vw,2.5rem)] font-bold mb-4">设定你的目标</h2>
+                    <p class="text-gray-600 max-w-2xl mx-auto">明确的目标是成功的一半。使用下方工具记录你的目标，并追踪进度。</p>
+                </div>
+                
+                <div class="max-w-3xl mx-auto">
+                    <div class="bg-gray-50 rounded-2xl p-8 shadow-md mb-12">
+                        <h3 class="text-xl font-bold mb-6">添加新目标</h3>
+                        <form id="goal-form" class="space-y-6">
+                            <div>
+                                <label for="goal-title" class="block text-gray-700 font-medium mb-2">目标名称</label>
+                                <input type="text" id="goal-title" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="例如：学习一门新技能">
+                            </div>
+                            
+                            <div>
+                                <label for="goal-description" class="block text-gray-700 font-medium mb-2">目标描述</label>
+                                <textarea id="goal-description" rows="3" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="详细描述你的目标..."></textarea>
+                            </div>
+                            
+                            <div>
+                                <label for="goal-deadline" class="block text-gray-700 font-medium mb-2">完成期限</label>
+                                <input type="date" id="goal-deadline" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                            </div>
+                            
+                            <button type="submit" class="w-full bg-primary hover:bg-primary/90 text-white font-medium py-3 px-6 rounded-lg transition-colors">
+                                保存目标
+                            </button>
+                        </form>
+                    </div>
+                    
+                    <h3 class="text-xl font-bold mb-6">我的目标清单</h3>
+                    <div id="goals-container" class="space-y-4">
+                        <!-- 目标卡片示例 -->
+                        <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow flex flex-col md:flex-row md:items-center justify-between">
+                            <div>
+                                <h4 class="font-bold text-lg mb-1">学习JavaScript编程</h4>
+                                <p class="text-gray-600 text-sm mb-2">掌握基本语法和DOM操作，能够独立编写简单的交互效果</p>
+                                <span class="text-xs text-gray-500">截止日期：2023年12月31日</span>
+                            </div>
+                            <div class="mt-4 md:mt-0 flex space-x-3">
+                                <div class="w-24 bg-gray-200 rounded-full h-2.5">
+                                    <div class="bg-primary h-2.5 rounded-full" style="width: 60%"></div>
+                                </div>
+                                <button class="text-green-500 hover:text-green-700 transition-colors">
+                                    <i class="fa fa-check-circle"></i>
+                                </button>
+                                <button class="text-red-500 hover:text-red-700 transition-colors">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 每日激励区域 -->
+        <section id="motivation" class="py-20 bg-gradient-to-br from-primary/5 to-secondary/5">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-16">
+                    <h2 class="text-[clamp(1.8rem,3vw,2.5rem)] font-bold mb-4">每日激励</h2>
+                    <p class="text-gray-600 max-w-2xl mx-auto">每天给自己一点鼓励，保持积极向上的心态。</p>
+                </div>
+                
+                <div class="max-w-4xl mx-auto">
+                    <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+                        <div class="p-8 md:p-10">
+                            <div class="flex justify-between items-center mb-8">
+                                <h3 class="text-xl font-bold" id="motivation-date">2023年10月15日</h3>
+                                <button id="refresh-motivation" class="text-primary hover:text-primary/80 transition-colors">
+                                    <i class="fa fa-refresh text-xl"></i>
+                                </button>
+                            </div>
+                            
+                            <div id="motivation-content" class="mb-8">
+                                <p class="text-2xl md:text-3xl font-medium text-center mb-6">
+                                    今天是你实现梦想的又一个机会。不要浪费它，用行动证明你的决心。
+                                </p>
+                                <p class="text-gray-600 text-center">
+                                    无论遇到什么困难，记住：每一步微小的进步，都在带你走向更远的地方。坚持下去，你会感谢今天努力的自己。
+                                </p>
+                            </div>
+                            
+                            <div class="text-center">
+                                <button id="share-motivation" class="px-6 py-3 bg-white border border-primary text-primary hover:bg-primary hover:text-white rounded-full transition-colors inline-flex items-center space-x-2">
+                                    <i class="fa fa-share-alt"></i>
+                                    <span>分享今日激励</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 积极行动建议 -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10">
+                        <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+                            <div class="text-primary text-3xl mb-4">
+                                <i class="fa fa-book"></i>
+                            </div>
+                            <h4 class="font-bold text-lg mb-2">阅读10分钟</h4>
+                            <p class="text-gray-600 text-sm">每天阅读10分钟，积累知识，开阔视野。</p>
+                        </div>
+                        
+                        <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+                            <div class="text-primary text-3xl mb-4">
+                                <i class="fa fa-heartbeat"></i>
+                            </div>
+                            <h4 class="font-bold text-lg mb-2">锻炼身体</h4>
+                            <p class="text-gray-600 text-sm">进行20分钟的运动，保持身体健康和精力充沛。</p>
+                        </div>
+                        
+                        <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+                            <div class="text-primary text-3xl mb-4">
+                                <i class="fa fa-thumbs-up"></i>
+                            </div>
+                            <h4 class="font-bold text-lg mb-2">感恩记录</h4>
+                            <p class="text-gray-600 text-sm">写下三件你今天感恩的事情，培养积极心态。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-dark text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <i class="fa fa-lightbulb-o text-2xl text-primary"></i>
+                        <span class="text-xl font-bold">点亮人生</span>
+                    </div>
+                    <p class="text-gray-400 mb-4">
+                        每天给自己一点激励，让生活充满正能量。
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fa fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fa fa-linkedin"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">快速链接</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="text-gray-400 hover:text-white transition-colors">首页</a></li>
+                        <li><a href="#quotes" class="text-gray-400 hover:text-white transition-colors">励志名言</a></li>
+                        <li><a href="#stories" class="text-gray-400 hover:text-white transition-colors">成功故事</a></li>
+                        <li><a href="#goals" class="text-gray-400 hover:text-white transition-colors">目标设定</a></li>
+                        <li><a href="#motivation" class="text-gray-400 hover:text-white transition-colors">每日激励</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">资源</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">励志书籍</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">推荐课程</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">播客节目</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">工具下载</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">订阅更新</h4>
+                    <p class="text-gray-400 mb-4">
+                        订阅我们的邮件，获取最新的励志内容。
+                    </p>
+                    <form class="flex">
+                        <input type="email" placeholder="你的邮箱地址" class="px-4 py-2 rounded-l-lg w-full focus:outline-none text-dark">
+                        <button type="submit" class="bg-primary hover:bg-primary/90 px-4 py-2 rounded-r-lg transition-colors">
+                            <i class="fa fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-10 pt-6 text-center text-gray-500">
+                <p>&copy; 2023 点亮人生 - 版权所有</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 返回顶部按钮 -->
+    <button id="back-to-top" class="fixed bottom-8 right-8 bg-primary text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg opacity-0 invisible transition-all z-50">
+        <i class="fa fa-chevron-up"></i>
+    </button>
+
+    <script>
+        // 导航栏滚动效果
+        const navbar = document.getElementById('navbar');
+        const backToTop = document.getElementById('back-to-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                navbar.classList.add('bg-white', 'shadow-md');
+                navbar.classList.remove('bg-transparent');
+                
+                backToTop.classList.remove('opacity-0', 'invisible');
+                backToTop.classList.add('opacity-100', 'visible');
+            } else {
+                navbar.classList.remove('bg-white', 'shadow-md');
+                navbar.classList.add('bg-transparent');
+                
+                backToTop.classList.add('opacity-0', 'invisible');
+                backToTop.classList.remove('opacity-100', 'visible');
+            }
+        });
+        
+        // 移动端菜单切换
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // 关闭移动端菜单
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                }
+            });
+        });
+        
+        // 返回顶部按钮
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // 设置当前日期
+        const motivationDate = document.getElementById('motivation-date');
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        motivationDate.textContent = new Date().toLocaleDateString('zh-CN', options);
+        
+        // 每日激励内容
+        const motivations = [
+            {
+                title: "今天是你实现梦想的又一个机会。不要浪费它，用行动证明你的决心。",
+                content: "无论遇到什么困难，记住：每一步微小的进步，都在带你走向更远的地方。坚持下去，你会感谢今天努力的自己。"
+            },
+            {
+                title: "相信自己的能力，你比想象中更强大。",
+                content: "挑战是成长的机会，困难是成功的前奏。拥抱它们，克服它们，你将变得更加优秀。"
+            },
+            {
+                title: "成功不是偶然的，而是日复一日坚持的结果。",
+                content: "专注于当下，做好每一件小事，积累起来就是巨大的成就。今天的努力，明天的回报。"
+            },
+            {
+                title: "你的态度决定你的高度。保持积极，一切皆有可能。",
+                content: "生活中充满了选择，选择乐观，选择努力，选择坚持，你就选择了成功的方向。"
+            },
+            {
+                title: "不要害怕失败，害怕的是从未尝试。",
+                content: "每一次失败都是宝贵的经验，它们教会你如何更好地前进。勇敢尝试，大胆行动。"
+            }
+        ];
+        
+        // 刷新每日激励
+        const refreshMotivation = document.getElementById('refresh-motivation');
+        const motivationContent = document.getElementById('motivation-content');
+        
+        refreshMotivation.addEventListener('click', () => {
+            const randomIndex = Math.floor(Math.random() * motivations.length);
+            const randomMotivation = motivations[randomIndex];
+            
+            motivationContent.innerHTML = `
+                <p class="text-2xl md:text-3xl font-medium text-center mb-6">
+                    ${randomMotivation.title}
+                </p>
+                <p class="text-gray-600 text-center">
+                    ${randomMotivation.content}
+                </p>
+            `;
+            
+            // 添加动画效果
+            motivationContent.classList.add('animate-pulse-slow');
+            setTimeout(() => {
+                motivationContent.classList.remove('animate-pulse-slow');
+            }, 1000);
+        });
+        
+        // 分享功能
+        const shareMotivation = document.getElementById('share-motivation');
+        
+        shareMotivation.addEventListener('click', () => {
+            const motivationText = motivationContent.querySelector('p:first-child').textContent;
+            const shareText = `今日激励: ${motivationText} #点亮人生`;
+            
+            if (navigator.share) {
+                navigator.share({
+                    title: '每日激励',
+                    text: shareText,
+                    url: window.location.href
+                }).catch(err => {
+                    console.log('分享失败:', err);
+                    alert('分享功能暂不支持，请手动复制分享。');
+                });
+            } else {
+                // 复制到剪贴板
+                navigator.clipboard.writeText(shareText).then(() => {
+                    alert('激励内容已复制到剪贴板，可以分享给朋友了！');
+                }).catch(err => {
+                    console.log('复制失败:', err);
+                    alert('复制失败，请手动复制。');
+                });
+            }
+        });
+        
+        // 目标表单提交
+        const goalForm = document.getElementById('goal-form');
+        const goalsContainer = document.getElementById('goals-container');
+        
+        goalForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const title = document.getElementById('goal-title').value;
+            const description = document.getElementById('goal-description').value;
+            const deadline = document.getElementById('goal-deadline').value;
+            
+            if (!title || !deadline) {
+                alert('请填写目标名称和完成期限');
+                return;
+            }
+            
+            // 格式化日期显示
+            const deadlineDate = new Date(deadline);
+            const formattedDeadline = deadlineDate.toLocaleDateString('zh-CN', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+            
+            // 创建新目标卡片
+            const goalCard = document.createElement('div');
+            goalCard.className = 'bg-white border border-gray-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow flex flex-col md:flex-row md:items-center justify-between';
+            goalCard.innerHTML = `
+                <div>
+                    <h4 class="font-bold text-lg mb-1">${title}</h4>
+                    <p class="text-gray-600 text-sm mb-2">${description || '无描述'}</p>
+                    <span class="text-xs text-gray-500">截止日期：${formattedDeadline}</span>
+                </div>
+                <div class="mt-4 md:mt-0 flex space-x-3">
+                    <div class="w-24 bg-gray-200 rounded-full h-2.5">
+                        <div class="bg-primary h-2.5 rounded-full" style="width: 0%"></div>
+                    </div>
+                    <button class="text-green-500 hover:text-green-700 transition-colors complete-goal">
+                        <i class="fa fa-check-circle"></i>
+                    </button>
+                    <button class="text-red-500 hover:text-red-700 transition-colors delete-goal">
+                        <i class="fa fa-trash"></i>
+                    </button>
+                </div>
+            `;
+            
+            // 添加到目标容器
+            goalsContainer.prepend(goalCard);
+            
+            // 重置表单
+            goalForm.reset();
+            
+            // 添加删除功能
+            const deleteButton = goalCard.querySelector('.delete-goal');
+            deleteButton.addEventListener('click', () => {
+                goalCard.remove();
+            });
+            
+            // 添加完成功能
+            const completeButton = goalCard.querySelector('.complete-goal');
+            completeButton.addEventListener('click', () => {
+                const progressBar = goalCard.querySelector('.bg-primary');
+                progressBar.style.width = '100%';
+                goalCard.classList.add('opacity-70');
+                const titleElement = goalCard.querySelector('h4');
+                titleElement.innerHTML += ' <span class="text-green-500 text-sm">(已完成)</span>';
+                completeButton.disabled = true;
+            });
+        });
+        
+        // 删除现有目标
+        document.querySelectorAll('.delete-goal').forEach(button => {
+            button.addEventListener('click', () => {
+                button.closest('.bg-white').remove();
+            });
+        });
+        
+        // 完成现有目标
+        document.querySelectorAll('.complete-goal').forEach(button => {
+            button.addEventListener('click', () => {
+                const goalCard = button.closest('.bg-white');
+                const progressBar = goalCard.querySelector('.bg-primary');
+                progressBar.style.width = '100%';
+                goalCard.classList.add('opacity-70');
+                const titleElement = goalCard.querySelector('h4');
+                titleElement.innerHTML += ' <span class="text-green-500 text-sm">(已完成)</span>';
+                button.disabled = true;
+            });
+        });
+        
+        // 加载更多名言
+        const newQuoteButton = document.getElementById('new-quote');
+        const quotesContainer = document.querySelector('#quotes .grid');
+        
+        const moreQuotes = [
+            {
+                text: "命运给予我们的不是失望之酒，而是机会之杯。",
+                author: "富兰克林·罗斯福",
+                title: "美国总统",
+                image: "https://picsum.photos/id/1027/100/100"
+            },
+            {
+                text: "生活没有彩排，每一天都是现场直播。",
+                author: "田馥甄",
+                title: "歌手",
+                image: "https://picsum.photos/id/1028/100/100"
+            },
+            {
+                text: "行动是治愈恐惧的良药，而犹豫、拖延将不断滋养恐惧。",
+                author: "马克·吐温",
+                title: "作家",
+                image: "https://picsum.photos/id/1076/100/100"
+            }
+        ];
+        
+        newQuoteButton.addEventListener('click', () => {
+            // 添加加载动画
+            newQuoteButton.innerHTML = '<i class="fa fa-spinner fa-spin mr-2"></i> 加载中...';
+            newQuoteButton.disabled = true;
+            
+            setTimeout(() => {
+                moreQuotes.forEach(quote => {
+                    const quoteCard = document.createElement('div');
+                    quoteCard.className = 'bg-gray-50 rounded-xl p-8 shadow-md hover:shadow-lg transition-shadow border border-gray-100';
+                    quoteCard.innerHTML = `
+                        <div class="text-accent text-4xl mb-4">
+                            <i class="fa fa-quote-left"></i>
+                        </div>
+                        <p class="text-lg italic mb-6">
+                            "${quote.text}"
+                        </p>
+                        <div class="flex items-center">
+                            <img src="${quote.image}" alt="${quote.author}肖像" class="w-12 h-12 rounded-full object-cover mr-4">
+                            <div>
+                                <h4 class="font-semibold">${quote.author}</h4>
+                                <p class="text-sm text-gray-500">${quote.title}</p>
+                            </div>
+                        </div>
+                    `;
+                    
+                    quotesContainer.appendChild(quoteCard);
+                });
+                
+                // 恢复按钮状态
+                newQuoteButton.innerHTML = '加载更多名言';
+                newQuoteButton.disabled = false;
+                
+                // 隐藏按钮，因为没有更多名言了
+                newQuoteButton.style.display = 'none';
+            }, 1500);
+        });
+    </script>
+</body>
+</html>
